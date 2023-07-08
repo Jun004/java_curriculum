@@ -46,13 +46,14 @@ public class Qes1_3 {
 			user_flag = 1;
 			
 		}
-		
+		}
 		
 		
 		
 		
 		while(flag == 0) {
 			
+		try {
 			Scanner user = new Scanner(System.in);
 			int u_hand = user.nextInt(3);
 			
@@ -87,11 +88,13 @@ public class Qes1_3 {
 			System.out.printf("%nDRAW あいこ もう一回しましょう！%n");	
 			i++;
 		}
-			
-			
 		
-		
+		} catch(NumberFormatException e) {
+			System.out.printf("%nDRA");
 		}
+		
+		
+		
 		
 		
 		
