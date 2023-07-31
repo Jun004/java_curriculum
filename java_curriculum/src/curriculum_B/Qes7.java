@@ -59,5 +59,6 @@ public class Qes7 {
 		System.out.println("理科の平均点は" + String.format("%.2f", sum_sc/stu_num) + "点です。");
 		System.out.println("社会の平均点は" + String.format("%.2f", sum_s/stu_num) + "点です。");
 		System.out.println("全体の平均点は" + String.format("%.2f", (sum_t/stu_num)/4) + "点です。");
+		scr.close();
 	}
 }
