@@ -4,37 +4,29 @@ import java.util.Scanner;
 public class Qes1_3 {
 
 	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
-		// 問１
-		// Scannerクラスで入力された値を取得
 		// 変数の宣言と初期化
-		int i = 1;
-		int user_flag = 0;
-		int flag = 0;
-		
-		String line1 = "";
-		String fu_hand = "";
-		String[] hands = {"グー","チョキ","パー"};
+		boolean isVaild = true;
+		String userName = "";
 			
-		Scanner scr = new Scanner(System.in);
+		Scanner sca = new Scanner(System.in);
 		// 繰り返し処理
-		while(user_flag == 0) {
-			// nextLineでScannerクラスに入力された値を文字列として取得
-			line1 = scr.nextLine();
+		while(isVaild) {
+			// 入力された値を文字列として取得
+			userName = sca.next();
 			
-			if (line1.length() >= 10) {
+			if (10 < userName.length()) {
 				// 入力された文字数が10以上の場合に出力
 				System.out.println("「名前を10文字以内にしてください」");
 				
-			} else if (line1.length() <= 0 || line1 == null) {
+			} else if (userName == null || userName.isEmpty()) {
 				// 文字数が0以下もしくはnullの場合に出力
 				System.out.println("「名前を入力してください」");
 				
-			} else if (line1.matches("[0-9a-zA-Z]+$")) {
+			} else if (userName.matches("^[0-9a-zA-Z]+$")) {
 				// 正しくユーザー名が入力された場合に出力
-				System.out.println("ユーザー名「" + line1 + "」を登録しました");
-				// while文から抜ける
-				user_flag = 1;
+				System.out.println("ユーザー名「" + userName + "」を登録しました");
+				// ループから抜ける
+				isVaild = false;
 			} else {
 				// (問２)半角英数字以外が入力された場合に出力
 				System.out.println("「半角英数字のみで名前を入力してください」");
@@ -42,56 +34,67 @@ public class Qes1_3 {
 			
 		}
 		
-		Scanner user = new Scanner(System.in);
+		int i = 1;
+		boolean isWin = true;
+		String uHandStr = "";
+		String[] hands = {"グー","チョキ","パー"};
+		
+		
 		// 繰り返し処理
-		while(flag == 0) {
+		while(isWin) {
 			System.out.printf("%n");
 			// scannerクラスで入力された値を文字列として取得
-			fu_hand = user.nextLine();
+			uHandStr = sca.next();
 			
 			// 半角数字0.1.2以外が入力された場合に再入力
-			if (fu_hand.matches("[^0-2]+$")) {
-				System.out.println("半角数字0,1,2のどれか1文字で入力してください。");
+			if (uHandStr == null || uHandStr.isEmpty()) {
+				// 文字数が0以下もしくはnullの場合に出力
+				System.out.println("数字0,1,2のどれか1文字で入力してください。");
+				continue;
+			}else if (2 < uHandStr.length()) {
+					System.out.println("数字0,1,2のどれか1文字で入力してください。");
+					continue;
+				  
+			} else if (uHandStr.matches("[^0-2０-２]+$")) {
+				System.out.println("数字0,1,2のどれか1文字で入力してください。");
 				continue;
 			}  
 			
-			// fu_handをu_handへint型に変換し代入
-			int u_hand = Integer.parseInt(fu_hand);
+			// int型に変換し代入
+			int uHand = Integer.parseInt(uHandStr);
 			
 			// pcからじゃんけんの手の値を0-2のどれかをランダムで取得
 			Random pc = new Random();
-			int p_hand = pc.nextInt(3);
+			int pcHand = pc.nextInt(3);
 			
-			System.out.println(line1 + "の手は「" + hands[u_hand] + "」");
-			System.out.println("相手の手は「" + hands[p_hand] + "」");
+			System.out.println(userName + "の手は「" + hands[uHand] + "」");
+			System.out.println("相手の手は「" + hands[pcHand] + "」");
 			
-			if((u_hand == 0 && p_hand == 1) || (u_hand == 1 && p_hand == 2) || (u_hand == 2 && p_hand == 0)) {
-				// じゃんけんに勝った時に出力し、iに1を代入
+			if((uHand == 0 && pcHand == 1) || (uHand == 1 && pcHand == 2) || (uHand == 2 && pcHand == 0)) {
+				// じゃんけんに勝った時に出力し、1を代入
 				System.out.printf("%nやるやん。%n次は俺にリベンジさせて%n");
 				System.out.printf("%n勝つまでにかかった合計回数は" + i + "回です%n");
 				i++;
 				// ループから抜ける
-				flag = 1;
-			} else if (u_hand == 1 && p_hand == 0){
-				// グーに負けた時に出力し、iに1を代入
+				isWin = false;
+			} else if (uHand == 1 && pcHand == 0){
+				// グーに負けた時に出力し、1を代入
 				System.out.printf("%n俺の勝ち！%n負けは次につながるチャンスです！%nネバーギブアップ！%n");
 				i++;
-			} else if (u_hand == 2 && p_hand == 1){
-				// チョキに負けた時に出力し、iに1を代入
+			} else if (uHand == 2 && pcHand == 1){
+				// チョキに負けた時に出力し、1を代入
 				System.out.printf("%n俺の勝ち！%nたかがじゃんけん、そう思ってないですか？%nそれやったら次も、俺が勝ちますよ%n");
 				i++;
-			} else if (u_hand == 0 && p_hand == 2){
-				// パーに負けた時に出力し、iに1を代入
+			} else if (uHand == 0 && pcHand == 2){
+				// パーに負けた時に出力し、1を代入
 				System.out.printf("%n俺の勝ち！%nなんで負けたか、明日まで考えといてください。%nそしたら何かが見えてくるはずです%n");
 				i++;
 			} else {
-				// あいこの時に出力し、iに1を代入
+				// あいこの時に出力し、1を代入
 				System.out.printf("%nDRAW あいこ もう一回しましょう！%n");	
 				i++;
 			}
-			
 		}
-		scr.close();
-		user.close();
+		sca.close();
 	}
 }

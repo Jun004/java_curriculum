@@ -1,24 +1,28 @@
 package curriculum_B;
 
+import java.text.DecimalFormat;
+
 public class Qes5 {
 
 	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
+		DecimalFormat format = new DecimalFormat();
+		format.setMinimumIntegerDigits(3);
 		for(int i = 1; i < 10; i++){
-			// 変数jを使っての2重ループ
+			// 2重ループ
 			for(int j = 1; j < 21; j++) {
-				// 変数iと変数jの掛け算式を3桁で出力
-				System.out.print(String.format("%03d", j) + " * " + String.format("%03d", i) + " = " + String.format("%03d", i * j));
-				// 変数jが20になったとき処理を抜ける
-				if (j == 20) {
-					break;
+				// 掛け算式を3桁で出力
+				String dfA = format.format(i);
+				String dfB = format.format(j);
+				String dfC = format.format(i * j);
+				System.out.print(dfB + " * " + dfA + " = " + dfC);
+				// 処理を抜ける
+				if (j < 20) {
+					// ||を出力
+					System.out.print(" || ");
 				}
-				// ||を出力
-				System.out.print(" || ");
 			}
 			// 改行させる
 			System.out.println();
 		}
 	}
-
 }
